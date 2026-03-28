@@ -112,6 +112,42 @@
   .nav-tab:hover { color: #e0d0bc; }
   .nav-tab.active { color: #e8d5b7; border-bottom-color: #c8a96e; }
 
+  /* ── LECTURE LINK BANNER ── */
+  .lecture-link-banner {
+    background: #1a2636;
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #2c3d52;
+  }
+  .lecture-link-banner .banner-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: #6a8aaa;
+    letter-spacing: 0.5px;
+  }
+  .lecture-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #c8a96e;
+    color: #1a2636;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    padding: 7px 18px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .lecture-link-btn:hover {
+    background: #e0c080;
+    transform: translateY(-1px);
+  }
+
   /* ── MAIN ── */
   main { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
 
@@ -839,6 +875,19 @@
   <button class="nav-tab" onclick="switchTab('l2')">Lecture 2 — Defining Culture</button>
 </div>
 
+<div class="lecture-link-banner" id="banner-l1">
+  <span class="banner-label">🎧 강의 원본 듣기 — Lecture 1</span>
+  <a class="lecture-link-btn" href="https://drive.google.com/file/d/1EfXsSOSlnwmYQM0OmLOFmUTgZbkIh9ca/view?usp=drive_link" target="_blank">
+    ▶ Listen to Lecture 1
+  </a>
+</div>
+<div class="lecture-link-banner" id="banner-l2" style="display:none;">
+  <span class="banner-label">🎧 강의 원본 듣기 — Lecture 2</span>
+  <a class="lecture-link-btn" href="https://drive.google.com/file/d/1H75p4nuLQnbxIePaY6reon08gZDV7Ulp/view?usp=drive_link" target="_blank">
+    ▶ Listen to Lecture 2
+  </a>
+</div>
+
 <main>
 
 <!-- ═══════════════════════════════════════ -->
@@ -1329,6 +1378,9 @@
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
     event.currentTarget.classList.add('active');
+    // Toggle lecture link banners
+    document.getElementById('banner-l1').style.display = (id === 'l1') ? 'flex' : 'none';
+    document.getElementById('banner-l2').style.display = (id === 'l2') ? 'flex' : 'none';
   }
 
   // ── Card toggle
