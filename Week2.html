@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 — Mission & Cultural Anthropology</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', serif;
+    background: #f5f0eb;
+    color: #2d2a26;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #2c3e50 0%, #4a3728 100%);
+    color: white;
+    padding: 36px 48px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  header .label {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c8b89a;
+    margin-bottom: 10px;
+  }
+  header h1 { font-size: 2rem; font-weight: normal; line-height: 1.3; position: relative; }
+  header h1 em { font-style: italic; color: #e8d5b7; }
+  header .subtitle {
+    margin-top: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: #a89880;
+    position: relative;
+  }
+  header .instructor-info {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  header .instructor-name { font-family: 'Arial', sans-serif; font-size: 13px; color: #e8d5b7; font-weight: bold; }
+  header .instructor-divider { width: 1px; height: 14px; background: rgba(255,255,255,0.2); }
+  header .instructor-contact { font-family: 'Arial', sans-serif; font-size: 12px; color: #a89880; }
+  header .instructor-contact a { color: #c8b89a; text-decoration: none; border-bottom: 1px solid rgba(200,184,154,0.4); }
+
+  /* ── NAV TABS ── */
+  .nav-tabs {
+    display: flex;
+    background: #2c3e50;
+    border-bottom: 3px solid #c8a96e;
+  }
+  .nav-tab {
+    padding: 14px 32px;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #9ab;
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: all 0.25s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+  }
+  .nav-tab:hover { color: #e0d0bc; }
+  .nav-tab.active { color: #e8d5b7; border-bottom-color: #c8a96e; }
+
+  /* ── LECTURE LINK BANNER ── */
+  .lecture-link-banner {
+    background: #1a2636;
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #2c3d52;
+  }
+  .lecture-link-banner .banner-label { font-family: 'Arial', sans-serif; font-size: 12px; color: #6a8aaa; }
+  .lecture-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #c8a96e;
+    color: #1a2636;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7px 18px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .lecture-link-btn:hover { background: #e0c080; }
+
+  /* ── MAIN ── */
+  main { max-width: 960px; margin: 0 auto; padding: 36px 24px 80px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    display: flex; align-items: center; gap: 14px;
+    margin: 36px 0 16px;
+  }
+  .section-title .icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .section-title h2 { font-size: 1.1rem; font-weight: normal; color: #4a3728; letter-spacing: 0.5px; }
+  .section-title .slide-ref { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; margin-left: auto; letter-spacing: 1px; }
+
+  /* ── OVERVIEW BANNER ── */
+  .overview-banner {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .overview-stat { text-align: center; flex: 1; min-width: 80px; }
+  .overview-stat .big { font-size: 1.8rem; font-weight: bold; color: #c8a96e; line-height: 1; }
+  .overview-stat .small { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+  .overview-divider { width: 1px; height: 40px; background: #e8e0d0; flex-shrink: 0; }
+
+  /* ── COURSE TIMELINE ── */
+  .timeline { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 24px; }
+  .timeline-phases { display: flex; border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+  .phase { flex: 1; padding: 16px; text-align: center; }
+  .phase-lens { background: #3d5a80; color: white; }
+  .phase-field { background: #7b5ea7; color: white; }
+  .phase-apply { background: #2e8b57; color: white; }
+  .phase-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; margin-bottom: 4px; }
+  .phase-title { font-size: 15px; font-weight: bold; }
+  .phase-weeks { font-family: 'Arial', sans-serif; font-size: 11px; opacity: 0.8; margin-top: 3px; }
+  .week-dots { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+  .week-dot {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Arial', sans-serif; font-size: 12px; font-weight: bold;
+    color: white;
+  }
+  .week-dot.lens { background: #3d5a80; }
+  .week-dot.field { background: #7b5ea7; }
+  .week-dot.apply { background: #2e8b57; }
+  .week-dot.current { box-shadow: 0 0 0 3px #c8a96e, 0 0 0 5px #fff; }
+  .week-labels { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .week-label { width: 34px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; color: #888; }
+
+  /* ── CONCEPT CHIPS (key terms) ── */
+  .concept-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .chip {
+    background: white;
+    border-radius: 100px;
+    padding: 8px 18px;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #4a3728;
+    border: 2px solid #e8d5b7;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .chip.accent { border-color: #c8a96e; color: #7a4a20; background: #fdf8f2; }
+  .chip.blue { border-color: #3d5a80; color: #2a3d5a; }
+  .chip.purple { border-color: #7b5ea7; color: #5a3e80; }
+  .chip.red { border-color: #c0392b; color: #8b1a1a; }
+  .chip.green { border-color: #2e8b57; color: #1a5a35; }
+
+  /* ── LAYER STACK (minimal) ── */
+  .layer-stack { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .layer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: white;
+    border-radius: 8px;
+    padding: 14px 18px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    border-left: 4px solid #e8d5b7;
+  }
+  .layer.l1 { border-left-color: #2e8b57; }
+  .layer.l2 { border-left-color: #c8a96e; }
+  .layer.l3 { border-left-color: #c0392b; }
+  .layer-num { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #bbb; width: 52px; flex-shrink: 0; }
+  .layer-name { font-size: 14px; font-weight: bold; color: #2d2a26; flex: 1; }
+  .layer-sub { font-family: 'Arial', sans-serif; font-size: 12px; color: #999; }
+
+  /* ── POSTURE ROW ── */
+  .posture-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .posture-item {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .posture-verb { font-size: 15px; font-weight: bold; color: #4a3728; margin-bottom: 4px; }
+  .posture-sub { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; }
+
+  /* ── AXIS CARDS ── */
+  .axis-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .axis-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 16px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    border-top: 3px solid #3d5a80;
+    text-align: center;
+  }
+  .axis-num { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #bbb; margin-bottom: 6px; }
+  .axis-name { font-size: 14px; font-weight: bold; color: #2d2a26; margin-bottom: 4px; }
+  .axis-versus { font-family: 'Arial', sans-serif; font-size: 12px; color: #999; }
+
+  /* ── SPECIAL BOX ── */
+  .special-box {
+    background: #fdf8f2;
+    border: 2px solid #e8d5b7;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .special-box .label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #c8a96e; margin-bottom: 8px; }
+  .special-box p { font-family: 'Arial', sans-serif; font-size: 13px; color: #555; line-height: 1.6; }
+  .special-box strong { color: #4a3728; }
+
+  /* ── ICEBERG (simplified) ── */
+  .iceberg-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+  .ice-row {
+    background: white;
+    border-radius: 6px;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .ice-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .ice-row.top .ice-dot { background: #3d5a80; }
+  .ice-row.mid .ice-dot { background: #c8a96e; }
+  .ice-row.bot .ice-dot { background: #2e8b57; }
+  .ice-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #bbb; width: 100px; flex-shrink: 0; }
+  .ice-text { font-size: 13px; color: #4a3728; font-weight: bold; }
+  .ice-sub { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; margin-left: auto; }
+
+  /* ── DIMENSION CARDS ── */
+  .dim-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .dim-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 14px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+  .dim-icon { font-size: 26px; margin-bottom: 8px; }
+  .dim-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #bbb; margin-bottom: 6px; }
+  .dim-name { font-size: 15px; font-weight: bold; color: #2d2a26; margin-bottom: 4px; }
+  .dim-q { font-family: 'Arial', sans-serif; font-size: 12px; color: #888; font-style: italic; }
+
+  /* ── COMPARE MINI TABLE ── */
+  .compare-mini {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+  }
+  .cm-head { background: #2c3e50; color: #c8b89a; padding: 10px 14px; font-weight: bold; letter-spacing: 0.5px; }
+  .cm-head.g { background: #2e5a3a; color: #7ed9a0; }
+  .cm-head.r { background: #5a2e2e; color: #e9a0a0; }
+  .cm-cell { background: white; padding: 10px 14px; color: #555; border-bottom: 1px solid #f0ebe4; }
+  .cm-cell.row-label { background: #f8f5f0; color: #888; font-size: 11px; letter-spacing: 0.5px; }
+  .cm-cell.g { border-left: 2px solid #c8e6c9; }
+  .cm-cell.r { border-left: 2px solid #ffcdd2; }
+
+  /* ── CASE CARD (minimal) ── */
+  .case-mini {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: stretch;
+  }
+  .case-stripe { width: 6px; flex-shrink: 0; background: #c8a96e; }
+  .case-stripe.blue { background: #3d5a80; }
+  .case-stripe.purple { background: #7b5ea7; }
+  .case-stripe.red { background: #c0392b; }
+  .case-inner { padding: 14px 18px; }
+  .case-badge { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #c8a96e; margin-bottom: 4px; }
+  .case-name { font-size: 14px; font-weight: bold; color: #2d2a26; margin-bottom: 4px; }
+  .case-point { font-family: 'Arial', sans-serif; font-size: 12px; color: #777; }
+
+  /* ── TOOL STEPS ── */
+  .tool-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .tool-step {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 14px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+  .tool-num { font-size: 1.6rem; color: #c8a96e; font-style: italic; line-height: 1.2; }
+  .tool-verb { font-size: 14px; font-weight: bold; color: #2d2a26; margin-bottom: 4px; }
+  .tool-q { font-family: 'Arial', sans-serif; font-size: 11px; color: #999; font-style: italic; }
+
+  /* ── SUMMARY GRID ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .sum-block {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .sum-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #c8a96e; margin-bottom: 8px; }
+  .sum-title { font-size: 14px; font-weight: bold; color: #4a3728; margin-bottom: 10px; }
+  .sum-list { list-style: none; }
+  .sum-list li { font-family: 'Arial', sans-serif; font-size: 12px; color: #666; padding: 4px 0; border-bottom: 1px solid #f0ebe4; }
+  .sum-list li:last-child { border-bottom: none; }
+  .sum-list li::before { content: '→ '; color: #c8a96e; }
+
+  /* ── ASSIGNMENT ── */
+  .assignment-box {
+    background: linear-gradient(135deg, #2e5339 0%, #1a4028 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .assignment-box .label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #7ed9a0; margin-bottom: 10px; }
+  .assignment-box h3 { font-size: 1rem; margin-bottom: 10px; line-height: 1.5; }
+  .assignment-box p { font-family: 'Arial', sans-serif; font-size: 13px; opacity: 0.8; line-height: 1.65; }
+  .assignment-box .spec { margin-top: 12px; font-family: 'Arial', sans-serif; font-size: 11px; opacity: 0.55; letter-spacing: 1px; }
+
+  /* ── NEXT WEEK ── */
+  .next-box {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .next-icon { font-size: 28px; flex-shrink: 0; }
+  .next-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #bbb; margin-bottom: 4px; }
+  .next-title { font-size: 16px; color: #4a3728; font-weight: bold; margin-bottom: 2px; }
+  .next-sub { font-family: 'Arial', sans-serif; font-size: 12px; color: #999; }
+  .next-arrow { margin-left: auto; font-size: 20px; color: #c8a96e; }
+
+  /* ── QUOTE BOX ── */
+  .quote-box {
+    background: linear-gradient(135deg, #4a3728 0%, #6b4226 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 20px;
+    position: relative; overflow: hidden;
+  }
+  .quote-box::before { content: '"'; position: absolute; top: -10px; left: 20px; font-size: 100px; color: rgba(255,255,255,0.07); font-family: Georgia; line-height: 1; }
+  .quote-box blockquote { font-size: 16px; line-height: 1.65; font-style: italic; position: relative; margin-bottom: 12px; }
+  .quote-box .quote-author { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 1px; color: #c8b89a; }
+
+  /* ── DIVIDER ── */
+  hr.divider { border: none; border-top: 1px solid #e8e0d0; margin: 28px 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header { padding: 24px 20px 20px; }
+    header h1 { font-size: 1.4rem; }
+    main { padding: 24px 16px 60px; }
+    .posture-row { grid-template-columns: 1fr 1fr; }
+    .axis-row, .dim-grid, .tool-row { grid-template-columns: 1fr 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .compare-mini { grid-template-columns: 1fr; }
+    .nav-tab { padding: 12px 16px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">Mission &amp; Cultural Anthropology · Week 2</div>
+  <h1>The Invisible Filter &amp; <em>Worldview</em></h1>
+  <p class="subtitle">Session 1 &amp; Session 2 · Visual Summary</p>
+  <div class="instructor-info">
+    <span class="instructor-name">Joshua E. Kyung</span>
+    <div class="instructor-divider"></div>
+    <span class="instructor-contact">Questions or feedback? <a href="mailto:joshuakyung@gmail.com">joshuakyung@gmail.com</a></span>
+  </div>
+</header>
+
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="switchTab('s1', this)">Session 1 — Ethnocentrism</button>
+  <button class="nav-tab" onclick="switchTab('s2', this)">Session 2 — Worldview</button>
+</div>
+
+<div class="lecture-link-banner" id="banner-s1">
+  <span class="banner-label">🎧 강의 원본 듣기 — Session 1</span>
+  <a class="lecture-link-btn" href="#" target="_blank">▶ Listen to Session 1</a>
+</div>
+<div class="lecture-link-banner" id="banner-s2" style="display:none;">
+  <span class="banner-label">🎧 강의 원본 듣기 — Session 2</span>
+  <a class="lecture-link-btn" href="#" target="_blank">▶ Listen to Session 2</a>
+</div>
+
+<main>
+
+<!-- ═══════════════ SESSION 1 ═══════════════ -->
+<div class="tab-panel active" id="tab-s1">
+
+  <!-- Overview -->
+  <div class="overview-banner">
+    <div class="overview-stat"><div class="big">10</div><div class="small">Weeks Total</div></div>
+    <div class="overview-divider"></div>
+    <div class="overview-stat"><div class="big">3</div><div class="small">Phases</div></div>
+    <div class="overview-divider"></div>
+    <div class="overview-stat"><div class="big">~30</div><div class="small">Min / Session</div></div>
+    <div class="overview-divider"></div>
+    <div class="overview-stat"><div class="big">Week 2</div><div class="small">You Are Here</div></div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-phases">
+      <div class="phase phase-lens"><div class="phase-label">Phase 1</div><div class="phase-title">🔭 Lens</div><div class="phase-weeks">Weeks 1–2</div></div>
+      <div class="phase phase-field"><div class="phase-label">Phase 2</div><div class="phase-title">🌏 Field</div><div class="phase-weeks">Weeks 3–6</div></div>
+      <div class="phase phase-apply"><div class="phase-label">Phase 3</div><div class="phase-title">✋ Apply</div><div class="phase-weeks">Weeks 7–10</div></div>
+    </div>
+    <div class="week-dots">
+      <div class="week-dot lens" title="Week 1">1</div>
+      <div class="week-dot lens current" title="Week 2">2</div>
+      <div class="week-dot field">3</div><div class="week-dot field">4</div>
+      <div class="week-dot field">5</div><div class="week-dot field">6</div>
+      <div class="week-dot apply">7</div><div class="week-dot apply">8</div>
+      <div class="week-dot apply">9</div><div class="week-dot apply">10</div>
+    </div>
+    <div class="week-labels">
+      <div class="week-label">Culture</div><div class="week-label">Worldview</div>
+      <div class="week-label">Religion</div><div class="week-label">Language</div>
+      <div class="week-label">Contact</div><div class="week-label">Empathy</div>
+      <div class="week-label">Ethnography</div><div class="week-label">Context</div>
+      <div class="week-label">Reflect</div><div class="week-label">Final</div>
+    </div>
+  </div>
+
+  <!-- Key Terms -->
+  <div class="section-title">
+    <div class="icon" style="background:#fff0e0;">🔑</div>
+    <h2>Key Concepts — Session 1</h2>
+  </div>
+  <div class="concept-row">
+    <span class="chip accent">Ethnocentrism</span>
+    <span class="chip blue">Three Layers</span>
+    <span class="chip purple">Koreanism</span>
+    <span class="chip green">Slow Reaction Posture</span>
+    <span class="chip accent">Neo-Ethnicity</span>
+    <span class="chip red">동시대의 비동시대성</span>
+  </div>
+
+  <!-- Ethnocentrism Definition -->
+  <div class="section-title">
+    <div class="icon" style="background:#ffeef0;">🔍</div>
+    <h2>Ethnocentrism — William Graham Sumner (1906)</h2>
+    <span class="slide-ref">SLIDE 3</span>
+  </div>
+  <div class="special-box">
+    <div class="label">Definition</div>
+    <p>"The tendency to view your own cultural group as the <strong>center of everything</strong> — and to use your own cultural standards as the measure of all others."</p>
+  </div>
+  <div class="concept-row">
+    <span class="chip">Not arrogance — a default</span>
+    <span class="chip">Unconscious</span>
+    <span class="chip">Universal</span>
+  </div>
+
+  <!-- Three Layers -->
+  <div class="section-title">
+    <div class="icon" style="background:#e8f0ff;">🧱</div>
+    <h2>Ethnocentrism in Ministry — Three Layers</h2>
+    <span class="slide-ref">SLIDE 4</span>
+  </div>
+  <div class="layer-stack">
+    <div class="layer l1">
+      <div class="layer-num">Layer 1</div>
+      <div class="layer-name">Behavioral</div>
+      <div class="layer-sub">Observable practices &nbsp;·&nbsp; Surface reactions</div>
+    </div>
+    <div class="layer l2">
+      <div class="layer-num">Layer 2</div>
+      <div class="layer-name">Methodological</div>
+      <div class="layer-sub">Ministry methods assumed neutral &nbsp;·&nbsp; <em>"Koreanism"</em></div>
+    </div>
+    <div class="layer l3">
+      <div class="layer-num">Layer 3</div>
+      <div class="layer-name">Theological</div>
+      <div class="layer-sub">Cultural Christianity = the Gospel &nbsp;·&nbsp; Most dangerous</div>
+    </div>
+  </div>
+
+  <!-- Field Cases -->
+  <div class="section-title">
+    <div class="icon" style="background:#f0fff0;">🌏</div>
+    <h2>Field Cases — Indonesia</h2>
+    <span class="slide-ref">SLIDES 5–6</span>
+  </div>
+  <div class="case-mini">
+    <div class="case-stripe"></div>
+    <div class="case-inner">
+      <div class="case-badge">Case 1 · Methodological Ethnocentrism</div>
+      <div class="case-name">"The Disciple with a Knife"</div>
+      <div class="case-point">Direct public correction (Korean default) → public shame (Indonesian high-context reality). Method ≠ culturally neutral.</div>
+    </div>
+  </div>
+  <div class="case-mini">
+    <div class="case-stripe blue"></div>
+    <div class="case-inner">
+      <div class="case-badge">Case 2 · Surface Success / Hidden Failure</div>
+      <div class="case-name">"The Worship Transplant"</div>
+      <div class="case-point">Rigid program structure in relational community. Attendance ≠ engagement. Hiebert: surface success is the most dangerous failure.</div>
+    </div>
+  </div>
+
+  <!-- Slow Reaction Posture -->
+  <div class="section-title">
+    <div class="icon" style="background:#f0e8ff;">🧘</div>
+    <h2>The Antidote — Slow Reaction Posture</h2>
+    <span class="slide-ref">SLIDE 7</span>
+  </div>
+  <div class="posture-row">
+    <div class="posture-item"><div class="posture-verb">Ask</div><div class="posture-sub">Before interpreting</div></div>
+    <div class="posture-item"><div class="posture-verb">Observe</div><div class="posture-sub">Pattern, not incident</div></div>
+    <div class="posture-item"><div class="posture-verb">Be Aware</div><div class="posture-sub">Your lens is particular</div></div>
+    <div class="posture-item"><div class="posture-verb">React Slowly</div><div class="posture-sub">First reaction = ethnocentric</div></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Neo-Ethnicity -->
+  <div class="section-title">
+    <div class="icon" style="background:#e0f0ff;">🌆</div>
+    <h2>Neo-Ethnicity — Three Axes of Fragmentation</h2>
+    <span class="slide-ref">SLIDES 8–10</span>
+  </div>
+  <div class="special-box">
+    <div class="label">Core Claim</div>
+    <p>One ethnic/national group ≠ one culture. New cultural differentiation emerges <strong>within</strong> groups along three axes.</p>
+  </div>
+  <div class="axis-row">
+    <div class="axis-card">
+      <div class="axis-num">Axis 1</div>
+      <div class="axis-name">Geography</div>
+      <div class="axis-versus">Urban ↔ Rural</div>
+    </div>
+    <div class="axis-card" style="border-color:#7b5ea7;">
+      <div class="axis-num">Axis 2</div>
+      <div class="axis-name">Social Class</div>
+      <div class="axis-versus">Income &amp; Education</div>
+    </div>
+    <div class="axis-card" style="border-color:#2e8b57;">
+      <div class="axis-num">Axis 3</div>
+      <div class="axis-name">Generation</div>
+      <div class="axis-versus">Digital Natives ↔ Elders</div>
+    </div>
+  </div>
+  <div class="special-box">
+    <div class="label">Key Term</div>
+    <p><strong>동시대의 비동시대성</strong> — People sharing the same calendar year but inhabiting different lived cultural eras.</p>
+  </div>
+
+</div><!-- /tab-s1 -->
+
+
+<!-- ═══════════════ SESSION 2 ═══════════════ -->
+<div class="tab-panel" id="tab-s2">
+
+  <!-- Key Terms -->
+  <div class="section-title">
+    <div class="icon" style="background:#fff0e0;">🔑</div>
+    <h2>Key Concepts — Session 2</h2>
+  </div>
+  <div class="concept-row">
+    <span class="chip accent">Worldview</span>
+    <span class="chip blue">Cognitive</span>
+    <span class="chip purple">Affective</span>
+    <span class="chip red">Evaluative</span>
+    <span class="chip green">Guilt–Innocence</span>
+    <span class="chip accent">Shame–Honour</span>
+    <span class="chip blue">High / Low Context</span>
+    <span class="chip">Time Orientation</span>
+  </div>
+
+  <!-- Worldview Definition -->
+  <div class="section-title">
+    <div class="icon" style="background:#e8f0ff;">⚙️</div>
+    <h2>Worldview — Definition &amp; Iceberg</h2>
+    <span class="slide-ref">SLIDE 3</span>
+  </div>
+  <div class="special-box">
+    <div class="label">Definition</div>
+    <p>The set of fundamental assumptions through which a person interprets reality, self, others, time, morality, and ultimate meaning — <strong>usually without knowing it.</strong></p>
+  </div>
+  <div class="iceberg-mini">
+    <div class="ice-row top">
+      <div class="ice-dot"></div>
+      <div class="ice-label">Above waterline</div>
+      <div class="ice-text">Behavior / Language</div>
+      <div class="ice-sub">What we see first</div>
+    </div>
+    <div class="ice-row mid">
+      <div class="ice-dot"></div>
+      <div class="ice-label">Below waterline</div>
+      <div class="ice-text">Values / Norms</div>
+      <div class="ice-sub">Shapes behavior</div>
+    </div>
+    <div class="ice-row bot">
+      <div class="ice-dot"></div>
+      <div class="ice-label">Deepest layer</div>
+      <div class="ice-text">Worldview</div>
+      <div class="ice-sub">The operating system</div>
+    </div>
+  </div>
+
+  <!-- 3 Dimensions -->
+  <div class="section-title">
+    <div class="icon" style="background:#f0e8ff;">📐</div>
+    <h2>Hiebert's Three Dimensions of Worldview</h2>
+    <span class="slide-ref">SLIDE 4</span>
+  </div>
+  <div class="dim-grid">
+    <div class="dim-card">
+      <div class="dim-icon">🧠</div>
+      <div class="dim-label">Dimension 1</div>
+      <div class="dim-name">Cognitive</div>
+      <div class="dim-q">"What do I believe is real?"</div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">🎨</div>
+      <div class="dim-label">Dimension 2</div>
+      <div class="dim-name">Affective</div>
+      <div class="dim-q">"What do I feel is beautiful or sacred?"</div>
+    </div>
+    <div class="dim-card">
+      <div class="dim-icon">⚖️</div>
+      <div class="dim-label">Dimension 3</div>
+      <div class="dim-name">Evaluative</div>
+      <div class="dim-q">"What do I judge as right or wrong?"</div>
+    </div>
+  </div>
+
+  <!-- Case 1: Shame vs Guilt -->
+  <div class="section-title">
+    <div class="icon" style="background:#ffeef0;">🔴</div>
+    <h2>Case 1 — Moral Grammar: Guilt vs. Shame</h2>
+    <span class="slide-ref">SLIDE 5</span>
+  </div>
+  <div class="compare-mini">
+    <div class="cm-head"></div>
+    <div class="cm-head g">Guilt–Innocence</div>
+    <div class="cm-head r">Shame–Honour</div>
+
+    <div class="cm-cell row-label">Wrongdoing experienced as</div>
+    <div class="cm-cell g">Legal violation</div>
+    <div class="cm-cell r">Loss of face / contamination</div>
+
+    <div class="cm-cell row-label">Core question</div>
+    <div class="cm-cell g">"Am I guilty?"</div>
+    <div class="cm-cell r">"Am I clean? Do I belong?"</div>
+
+    <div class="cm-cell row-label">Gospel resonance</div>
+    <div class="cm-cell g">Acquittal / pardon</div>
+    <div class="cm-cell r">Cleansing / restoration / adoption</div>
+
+    <div class="cm-cell row-label">Common contexts</div>
+    <div class="cm-cell g">Western, Korean</div>
+    <div class="cm-cell r">South / Southeast Asian, Indian caste</div>
+  </div>
+  <div class="special-box">
+    <div class="label">Missiological Point</div>
+    <p>The problem is not theological — it is <strong>translation.</strong> The Gospel addresses both frameworks. Scripture contains both legal acquittal <em>and</em> cleansing, restoration, adoption.</p>
+  </div>
+
+  <!-- Case 2: Time -->
+  <div class="section-title">
+    <div class="icon" style="background:#e8f0ff;">⏱️</div>
+    <h2>Case 2 — Time Orientation</h2>
+    <span class="slide-ref">SLIDE 6</span>
+  </div>
+  <div class="axis-row">
+    <div class="axis-card" style="border-color:#3d5a80; grid-column: span 1;">
+      <div class="axis-num">Linear-Time</div>
+      <div class="axis-name">Time = Resource</div>
+      <div class="axis-versus">Punctuality = respect · West / Korea</div>
+    </div>
+    <div class="axis-card" style="border-color:#7b5ea7; grid-column: span 1;">
+      <div class="axis-num">Event-Oriented</div>
+      <div class="axis-name">Time = Container</div>
+      <div class="axis-versus">Event begins when community gathers · South/SE Asia</div>
+    </div>
+    <div class="axis-card" style="border-color:#c8a96e; grid-column: span 1;">
+      <div class="axis-num">Field Story · Java</div>
+      <div class="axis-name">"The 10am Service"</div>
+      <div class="axis-versus">Pre-service fellowship = the liturgy · Korean missionary missed it</div>
+    </div>
+  </div>
+  <div class="special-box">
+    <div class="label">Source</div>
+    <p>Lingenfelter &amp; Mayers, <em>Ministering Cross-Culturally</em> — time orientation as a worldview clash, not a discipline problem.</p>
+  </div>
+
+  <!-- Case 3: High/Low Context -->
+  <div class="section-title">
+    <div class="icon" style="background:#f0fff0;">💬</div>
+    <h2>Case 3 — High / Low Context Communication</h2>
+    <span class="slide-ref">SLIDE 7</span>
+  </div>
+  <div class="axis-row">
+    <div class="axis-card" style="border-color:#3d5a80;">
+      <div class="axis-num">Low-Context</div>
+      <div class="axis-name">Meaning in words</div>
+      <div class="axis-versus">Explicit · Direct · Germany / USA</div>
+    </div>
+    <div class="axis-card" style="border-color:#7b5ea7;">
+      <div class="axis-num">High-Context</div>
+      <div class="axis-name">Meaning in context</div>
+      <div class="axis-versus">Indirect · Relational · Japan / Indonesia / India</div>
+    </div>
+    <div class="axis-card" style="border-color:#c8a96e;">
+      <div class="axis-num">Source</div>
+      <div class="axis-name">Edward Hall</div>
+      <div class="axis-versus"><em>Beyond Culture</em> — high/low context spectrum</div>
+    </div>
+  </div>
+  <div class="case-mini">
+    <div class="case-stripe purple"></div>
+    <div class="case-inner">
+      <div class="case-badge">Field Story A · Indonesia</div>
+      <div class="case-name">"The Missing Clothes"</div>
+      <div class="case-point">Direct accusation = irreparable shame. Indirect correction preserved face and restored the situation. Silence ≠ dishonesty.</div>
+    </div>
+  </div>
+  <div class="case-mini">
+    <div class="case-stripe red"></div>
+    <div class="case-inner">
+      <div class="case-badge">Field Story B · Indonesia</div>
+      <div class="case-name">"The Phone Bill"</div>
+      <div class="case-point">"This month's phone bill... wow." — entire message delivered without a single direct word. High-context = richer, layered frequency.</div>
+    </div>
+  </div>
+
+  <!-- Practical Tool -->
+  <div class="section-title">
+    <div class="icon" style="background:#e0fff0;">🛠️</div>
+    <h2>Practical Tool — Observe → Probe → Apply</h2>
+    <span class="slide-ref">SLIDE 9</span>
+  </div>
+  <div class="tool-row">
+    <div class="tool-step">
+      <div class="tool-num">01</div>
+      <div class="tool-verb">Observe</div>
+      <div class="tool-q">What actually happened? (strip interpretation)</div>
+    </div>
+    <div class="tool-step">
+      <div class="tool-num">02</div>
+      <div class="tool-verb">Probe</div>
+      <div class="tool-q">Which worldview dimension is at work?</div>
+    </div>
+    <div class="tool-step">
+      <div class="tool-num">03</div>
+      <div class="tool-verb">Apply</div>
+      <div class="tool-q">How must method / language / posture shift?</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Week Summary -->
+  <div class="section-title">
+    <div class="icon" style="background:#f0fff0;">✅</div>
+    <h2>Week 2 Summary</h2>
+  </div>
+  <div class="summary-grid">
+    <div class="sum-block">
+      <div class="sum-label">Session 1</div>
+      <div class="sum-title">The Invisible Filter</div>
+      <ul class="sum-list">
+        <li>Ethnocentrism — definition, 3 attributes</li>
+        <li>3 layers: behavioral / methodological / theological</li>
+        <li>Field cases: knife, worship transplant</li>
+        <li>Slow reaction posture (4 moves)</li>
+        <li>Neo-ethnicity — 3 axes</li>
+        <li>동시대의 비동시대성</li>
+      </ul>
+    </div>
+    <div class="sum-block">
+      <div class="sum-label">Session 2</div>
+      <div class="sum-title">The Operating System</div>
+      <ul class="sum-list">
+        <li>Worldview — definition, iceberg model</li>
+        <li>Hiebert's 3 dimensions: cognitive / affective / evaluative</li>
+        <li>Guilt–Innocence vs. Shame–Honour</li>
+        <li>Time orientation (Java case)</li>
+        <li>High/Low context — Edward Hall (2 cases)</li>
+        <li>Observe → Probe → Apply</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Assignment -->
+  <div class="assignment-box">
+    <div class="label">📝 Reflection Paper — Week 2</div>
+    <h3>Find one specific situation in your ministry context. Analyze it through the worldview lens.</h3>
+    <p>Describe what you observed → Name the worldview dimension at work → Suggest one practical implication.</p>
+    <div class="spec">250–350 words &nbsp;·&nbsp; Written Response &nbsp;·&nbsp; Due: End of Week 2</div>
+  </div>
+
+  <!-- Next Week -->
+  <div class="next-box">
+    <div class="next-icon">🕌</div>
+    <div>
+      <div class="next-label">Coming Next — Week 3</div>
+      <div class="next-title">Religion as a Cultural Phenomenon</div>
+      <div class="next-sub">Clifford Geertz · Religion as symbol system · Reading practice, not just doctrine</div>
+    </div>
+    <div class="next-arrow">→</div>
+  </div>
+
+</div><!-- /tab-s2 -->
+</main>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    document.getElementById('banner-s1').style.display = (id === 's1') ? 'flex' : 'none';
+    document.getElementById('banner-s2').style.display = (id === 's2') ? 'flex' : 'none';
+  }
+</script>
+</body>
+</html>
